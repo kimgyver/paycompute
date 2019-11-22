@@ -1,0 +1,9 @@
+/.vs
+/Paycompute/obj
+/Paycompute/bin
+/Paycompute.Entity/obj
+/Paycompute.Entity/bin
+/Paycompute.Persistence/obj
+/Paycompute.Persistence/bin
+/Paycompute.Services/obj
+/Paycompute.Services/bin
