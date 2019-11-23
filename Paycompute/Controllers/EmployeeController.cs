@@ -99,7 +99,8 @@ namespace Paycompute.Controllers
             var employee = _employeeService.GetById(id);
             if (employee == null)
             {
-                return NotFound();
+                return View();
+                //return NotFound();
             }
             var model = new EmployeeEditViewModel()
             {
