@@ -38,17 +38,6 @@ namespace Paycompute.Services.Implementation
         public Employee GetById(int employeeId) =>
             _context.Employees.Where(e => e.Id == employeeId).FirstOrDefault();
       
-
-        public decimal StudentLoanRepaymentAmount(int id, decimal totalAmount)
-        {
-            throw new NotImplementedException();
-        }
-
-        public decimal UnionFees(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task UpdateAsync(Employee employee)
         {
             _context.Update(employee);
@@ -60,6 +49,30 @@ namespace Paycompute.Services.Implementation
             var employee = GetById(id);
             _context.Update(employee);
             await _context.SaveChangesAsync();
+        }
+        public decimal StudentLoanRepaymentAmount(int id, decimal totalAmount)
+        {
+            var employee = GetById(id);
+            if (employee.StudentLoan != StudentLoan.Yes || totalAmount < 1750)
+                return 0m;
+
+            decimal studentLoanAmount = 0m;
+            if (totalAmount >= 1750 && totalAmount < 2000)
+                studentLoanAmount = 15m;
+            else if (totalAmount >= 2000 && totalAmount < 2250)
+                studentLoanAmount = 38m;
+            else if (totalAmount >= 2250 && totalAmount < 2500)
+                studentLoanAmount = 60m;
+            else if (totalAmount >= 2500)
+                studentLoanAmount = 83m;
+
+            return studentLoanAmount;
+        }
+
+        public decimal UnionFees(int id)
+        {
+            var employee = GetById(id);
+            return (employee.UnionMember == UnionMember.Yes) ? 10m : 0m;
         }
     }
 }
