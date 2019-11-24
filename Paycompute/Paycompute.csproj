@@ -11,6 +11,7 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
+    <PackageReference Include="RotativaCore" Version="2.2.0" />
   </ItemGroup>
 
 
@@ -19,9 +20,18 @@
     <ProjectReference Include="..\Paycompute.Services\Paycompute.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="WkHtmlToPdf\wkhtmltoimage.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="WkHtmlToPdf\wkhtmltopdf.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Data\" />
+    <Folder Include="WkHtmlToPdf\" />
     <Folder Include="wwwroot\images\employee\" />
   </ItemGroup>
 

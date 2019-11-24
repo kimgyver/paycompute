@@ -2,6 +2,7 @@
 using Paycompute.Entity;
 using Paycompute.Models;
 using Paycompute.Services;
+using RotativaCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -145,6 +146,15 @@ namespace Paycompute.Controllers
         public IActionResult Payslip(int id)
         {
             return Detail(id);
+        }
+
+        public IActionResult GeneratePayslipPDF(int id)
+        {
+            var payslip = new ActionAsPdf("Payslip", new { id = id })
+            {
+                FileName = "payslip.pdf"
+            };
+            return payslip;
         }
     }
 }
