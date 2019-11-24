@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Paycompute.Entity;
 using Paycompute.Persistence;
 
@@ -50,6 +51,7 @@ namespace Paycompute.Services.Implementation
             _context.Update(employee);
             await _context.SaveChangesAsync();
         }
+
         public decimal StudentLoanRepaymentAmount(int id, decimal totalAmount)
         {
             var employee = GetById(id);
@@ -73,6 +75,15 @@ namespace Paycompute.Services.Implementation
         {
             var employee = GetById(id);
             return (employee.UnionMember == UnionMember.Yes) ? 10m : 0m;
+        }
+
+        public IEnumerable<SelectListItem> GetAllEmployeesForPayroll()
+        {
+            return GetAll().Select(emp => new SelectListItem()
+            {
+                Text = emp.FullName,
+                Value = emp.Id.ToString()
+            });
         }
     }
 }
